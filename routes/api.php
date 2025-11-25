@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/users', [UserController::class, 'store']);
+Route::post('/login', [UserController::class, 'login']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();
