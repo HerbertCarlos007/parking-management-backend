@@ -25,7 +25,7 @@ class StoreUpdateUserRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'phone_number' => ['nullable', 'string'],
-            'role' => ['required', 'string'],
+            'role' => ['string'],
             'password' => ['required', 'min:6', 'max:100'],
         ];
     }

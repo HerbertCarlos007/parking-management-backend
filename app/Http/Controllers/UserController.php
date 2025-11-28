@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Role;
 use App\Http\Requests\StoreLoginRequest;
 use App\Http\Requests\StoreUpdateUserRequest;
 use App\Http\Resources\UserResource;
@@ -13,6 +14,7 @@ class UserController extends Controller
     public function store(StoreUpdateUserRequest $request)
     {
         $validated = $request->validated();
+        $validated['role'] = Role::USER;
 
         $user = User::create($validated);
         $token = $user->createToken('api_token')->plainTextToken;
