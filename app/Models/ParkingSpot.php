@@ -17,6 +17,10 @@ class ParkingSpot extends Model
         'status' => SpotStatus::class,
     ];
 
+    protected $attributes = [
+        'status' => SpotStatus::AVAILABLE
+    ];
+
     public function parkingEntries(): HasMany
     {
         return $this->hasMany(ParkingEntry::class);
