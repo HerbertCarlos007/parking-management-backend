@@ -11,7 +11,7 @@ class ParkingEntry extends Model
 {
     protected $fillable =  [
         'client_id',
-        'plate_number',
+        'plate',
         'model',
         'color',
         'spot_id',
@@ -21,13 +21,13 @@ class ParkingEntry extends Model
         'price',
         'status',
         'created_by',
-        'created_at',
-        'updated_at',
     ];
 
     protected $casts = [
         'type_entry' => EntryType::class,
         'status' => EntryStatus::class,
+        'entered_at' => 'datetime',
+        'left_at' => 'datetime',
     ];
 
     public function client(): BelongsTo

@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ParkingEntriesController;
 use App\Http\Controllers\ParkingSpotController;
 use App\Http\Controllers\UserController;
+use App\Models\ParkingEntry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,3 +21,7 @@ Route::get('/clients', [ClientController::class, 'index']);
 
 Route::post('/parking-spots', [ParkingSpotController::class, 'store']);
 Route::get('/parking-spots', [ParkingSpotController::class, 'index']);
+
+Route::post('/parking-entries', [ParkingEntriesController::class, 'store']);
+Route::get('/parking-entries', [ParkingEntriesController::class, 'index']);
+Route::put('/parking-entries/{parkingEntry}', [ParkingEntriesController::class, 'update']);
