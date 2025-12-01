@@ -37,12 +37,19 @@ class ParkingEntriesController extends Controller
 
         $enteredAt = Carbon::parse($parkingEntry->entered_at);
         $leftAt = Carbon::now();
-        $hours = ceil($enteredAt->diffInMinutes($leftAt) / 60);
-        $price = $hours * 10;
+        $totalHoursParked = ceil($enteredAt->diffInMinutes($leftAt) / 60);
+
+        $totalMinutesParked = $enteredAt->diffInMinutes($leftAt);
+
+        if ($totalMinutesParked <= 15) {
+            $calculatedPrice = 0;
+        }else {
+            $calculatedPrice = $totalHoursParked * 10;
+        }
 
         $parkingEntry->update([
             'left_at' => $leftAt,
-            'price' => $price,
+            'price' => $calculatedPrice,
             'status' => EntryStatus::CLOSED,
         ]);
         return new ParkingEntriesResource($parkingEntry);
