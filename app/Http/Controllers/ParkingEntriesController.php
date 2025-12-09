@@ -20,9 +20,10 @@ class ParkingEntriesController extends Controller
 
     }
 
-    public function index()
+    public function index($status)
     {
-        $parkingEntries = ParkingEntry::all();
+        $parkingEntries = ParkingEntry::with('client:id,name')
+        ->where('status', $status)->get();
         return ParkingEntriesResource::collection($parkingEntries);
     }
 

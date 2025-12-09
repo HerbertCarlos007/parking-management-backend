@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,13 +18,16 @@ class ParkingEntriesResource extends JsonResource
         return [
             'id' => $this->id,
             'client_id' => $this->client_id,
+            'client_name' => $this->whenLoaded('client', function () {
+                return $this->client->name;
+            }),
             'plate' => $this->plate,
             'model' => $this->model,
             'color' => $this->color,
             'spot_id' => $this->spot_id,
             'status' => $this->status,
             'type_entry' => $this->type_entry,
-            'entered_at' => $this->entered_at,
+            'entered_at' => Carbon::make($this->entered_at)->format('d-m-y H:i'),
             'left_at' => $this->left_at,
             'price' => round($this->price, 2),
             'created_by' => $this->created_by,
