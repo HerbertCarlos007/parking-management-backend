@@ -28,7 +28,7 @@ class ParkingEntriesResource extends JsonResource
             'status' => $this->status,
             'type_entry' => $this->type_entry,
             'entered_at' => Carbon::make($this->entered_at)->format('d-m-y H:i'),
-            'left_at' => Carbon::make($this->left_at)->format('d-m-y H:i'),
+            'left_at' => $this->left_at ? Carbon::make($this->left_at)->format('d-m-y H:i') : null,
             'price' => number_format($this->price, 2, ',', '.'),
             'created_by' => $this->created_by,
             'created_at' => $this->created_at,
