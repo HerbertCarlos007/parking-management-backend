@@ -28,10 +28,10 @@ class StoreUpdateParkingEntriesRequest extends FormRequest
             'color' => 'nullable|string',
             'spot_id' => 'required|exists:parking_spots,id',
             'type_entry' => 'nullable|string',
-            'entered_at' => 'required|date_format:Y-m-d H:i:s',
+            'entered_at' => 'date_format:Y-m-d H:i:s',
             'left_at' => 'nullable|date_format:Y-m-d H:i:s|after:entered_at',
             'price' => 'nullable|numeric|min:0',
-            'status' => 'required|string',
+            'status' => 'string',
             'created_by' => 'nullable|integer',
         ];
     }

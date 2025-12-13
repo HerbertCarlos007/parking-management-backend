@@ -14,6 +14,9 @@ class ParkingEntriesController extends Controller
     public function store(StoreUpdateParkingEntriesRequest $request)
     {
         $validated = $request->validated();
+        $validated['entered_at'] = now();
+        $validated['status'] = EntryStatus::OPEN->value;
+        $validated['created_by'] = 3;
         $parkingEntry = ParkingEntry::create($validated);
 
         return new ParkingEntriesResource($parkingEntry);
