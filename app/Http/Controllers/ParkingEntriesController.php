@@ -45,6 +45,8 @@ class ParkingEntriesController extends Controller
             ], 400);
         }
 
+        $spotId = $parkingEntry->spot_id;
+
         $enteredAt = Carbon::parse($parkingEntry->entered_at);
         $leftAt = Carbon::now();
         $totalHoursParked = ceil($enteredAt->diffInMinutes($leftAt) / 60);
@@ -56,6 +58,8 @@ class ParkingEntriesController extends Controller
         }else {
             $calculatedPrice = $totalHoursParked * 10;
         }
+
+        ParkingSpot::where('id', $spotId)->update(['status' => SpotStatus::AVAILABLE->value]);
 
         $parkingEntry->update([
             'left_at' => $leftAt,
