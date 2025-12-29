@@ -4,12 +4,12 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ParkingEntriesController;
 use App\Http\Controllers\ParkingSpotController;
 use App\Http\Controllers\UserController;
-use App\Models\ParkingEntry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/users', [UserController::class, 'store']);
 Route::post('/login', [UserController::class, 'login']);
+Route::get('/users', [UserController::class, 'index']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();

@@ -14,8 +14,6 @@ class UserController extends Controller
     public function store(StoreUpdateUserRequest $request)
     {
         $validated = $request->validated();
-        $validated['role'] = Role::USER;
-
         $user = User::create($validated);
         $token = $user->createToken('api_token')->plainTextToken;
 
@@ -41,5 +39,11 @@ class UserController extends Controller
             'token_type' => 'Bearer',
             'user' => new UserResource($user),
         ]);
+    }
+
+    public function index()
+    {
+        $users = User::all();
+        return UserResource::collection($users);
     }
 }
