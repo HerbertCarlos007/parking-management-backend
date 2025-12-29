@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/users', [UserController::class, 'store']);
 Route::post('/login', [UserController::class, 'login']);
 Route::get('/users', [UserController::class, 'index']);
+Route::put('/users/{user}', [UserController::class, 'update']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();

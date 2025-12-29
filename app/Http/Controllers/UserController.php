@@ -46,4 +46,11 @@ class UserController extends Controller
         $users = User::all();
         return UserResource::collection($users);
     }
+
+    public function update(User $user, StoreUpdateUserRequest $request)
+    {
+        $validated = $request->validated();
+        $user->update($validated);
+        return new UserResource($user);
+    }
 }
