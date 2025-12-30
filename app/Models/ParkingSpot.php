@@ -23,6 +23,6 @@ class ParkingSpot extends Model
 
     public function parkingEntries(): HasMany
     {
-        return $this->hasMany(ParkingEntry::class);
+        return $this->hasMany(ParkingEntry::class, 'spot_id', 'id');
     }
 }

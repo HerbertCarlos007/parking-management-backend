@@ -37,6 +37,6 @@ class ParkingEntry extends Model
 
     public function parkingSpot(): BelongsTo
     {
-        return $this->belongsTo(ParkingSpot::class);
+        return $this->belongsTo(ParkingSpot::class, 'spot_id', 'id');
     }
 }

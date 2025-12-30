@@ -32,7 +32,8 @@ class ParkingEntriesController extends Controller
     public function index($status)
     {
         $parkingEntries = ParkingEntry::with('client:id,name')
-        ->where('status', $status)->get();
+            ->where('status', $status)
+            ->orderByDesc('entered_at')->get();
         return ParkingEntriesResource::collection($parkingEntries);
     }
 
@@ -55,7 +56,7 @@ class ParkingEntriesController extends Controller
 
         if ($totalMinutesParked <= 15) {
             $calculatedPrice = 0;
-        }else {
+        } else {
             $calculatedPrice = $totalHoursParked * 10;
         }
 
