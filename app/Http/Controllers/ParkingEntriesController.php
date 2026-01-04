@@ -66,6 +66,8 @@ class ParkingEntriesController extends Controller
             'left_at' => $leftAt,
             'price' => $calculatedPrice,
             'status' => EntryStatus::CLOSED,
+            'duration' => $totalMinutesParked,
+            'is_paid' => true
         ]);
         return new ParkingEntriesResource($parkingEntry);
     }
