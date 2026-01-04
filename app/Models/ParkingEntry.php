@@ -21,6 +21,8 @@ class ParkingEntry extends Model
         'price',
         'status',
         'created_by',
+        'duration',
+        'is_paid'
     ];
 
     protected $casts = [
@@ -28,6 +30,7 @@ class ParkingEntry extends Model
         'status' => EntryStatus::class,
         'entered_at' => 'datetime',
         'left_at' => 'datetime',
+        'is_paid' => 'boolean',
     ];
 
     public function client(): BelongsTo
