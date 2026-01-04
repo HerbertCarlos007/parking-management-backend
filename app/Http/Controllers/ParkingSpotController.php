@@ -6,12 +6,14 @@ use App\Enums\SpotStatus;
 use App\Http\Requests\StoreUpdateParkingSpotRequest;
 use App\Http\Resources\ParkingSpotResource;
 use App\Models\ParkingSpot;
+use App\Models\ParkingSpotStats;
 
 class ParkingSpotController extends Controller
 {
     public function store(StoreUpdateParkingSpotRequest $request)
     {
         $validated = $request->validated();
+        $validated['status'] = SpotStatus::AVAILABLE;
         $parkingSpot = ParkingSpot::create($validated);
         return new ParkingSpotResource($parkingSpot);
     }
@@ -37,6 +39,12 @@ class ParkingSpotController extends Controller
             }
         ])->get();
         return ParkingSpotResource::collection($spots);
+    }
+
+    public function getSpotsStats()
+    {
+        $stats = ParkingSpotStats::first();
+        return response()->json($stats);
     }
 
 }

@@ -25,6 +25,7 @@ Route::post('/parking-spots', [ParkingSpotController::class, 'store']);
 Route::get('/parking-spots', [ParkingSpotController::class, 'index']);
 Route::get('/parking-spots-available', [ParkingSpotController::class, 'getParkingSpotsAvailables']);
 Route::get('/parking-spots-status', [ParkingSpotController::class, 'getParkingSpotsStatus']);
+Route::get('/spots-stats', [ParkingSpotController::class, 'getSpotsStats']);
 
 Route::post('/parking-entries', [ParkingEntriesController::class, 'store']);
 Route::get('/parking-entries/{status}', [ParkingEntriesController::class, 'index']);
