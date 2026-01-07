@@ -37,6 +37,13 @@ class ParkingEntriesController extends Controller
         return ParkingEntriesResource::collection($parkingEntries);
     }
 
+    public function getAllParkingEntries()
+    {
+        $parkingEntries = ParkingEntry::with('client:id,name')
+            ->orderByDesc('entered_at')->get();
+        return ParkingEntriesResource::collection($parkingEntries);
+    }
+
     public function update(ParkingEntry $parkingEntry)
     {
 

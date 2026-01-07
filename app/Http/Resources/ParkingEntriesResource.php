@@ -30,9 +30,24 @@ class ParkingEntriesResource extends JsonResource
             'entered_at' => Carbon::make($this->entered_at)->format('d-m-y H:i'),
             'left_at' => $this->left_at ? Carbon::make($this->left_at)->format('d-m-y H:i') : null,
             'price' => number_format($this->price, 2, ',', '.'),
+            'duration' => $this->formatDuration($this->duration),
+            'is_paid' => $this->is_paid,
             'created_by' => $this->created_by,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
     }
+
+    private function formatDuration($minutes)
+    {
+        if (!$minutes) {
+            return null;
+        }
+
+        $hours = intdiv($minutes, 60);
+        $remainingMinutes = $minutes % 60;
+
+        return sprintf('%02d:%02d', $hours, $remainingMinutes);
+    }
+
 }
