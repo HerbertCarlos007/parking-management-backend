@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ParkingEntriesController;
+use App\Http\Controllers\ParkingSettingController;
 use App\Http\Controllers\ParkingSpotController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -34,6 +35,9 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/parking-entries/{status}', [ParkingEntriesController::class, 'index']);
     Route::get('all-parking_entries', [ParkingEntriesController::class, 'getAllParkingEntries']);
     Route::put('/parking-entries/{parkingEntry}', [ParkingEntriesController::class, 'update']);
+
+    Route::post('parking-settings', [ParkingSettingController::class, 'store']);
+    Route::get('parking-settings', [ParkingSettingController::class, 'index']);
 });
 
 
