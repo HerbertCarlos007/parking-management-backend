@@ -27,6 +27,7 @@ class StoreUpdateUserRequest extends FormRequest
             'phone_number' => ['nullable', 'string'],
             'role' => ['string'],
             'password' => ['min:6', 'max:100'],
+            'id_parking_settings' => ['required', 'integer']
         ];
     }
 }

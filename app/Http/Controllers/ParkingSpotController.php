@@ -18,33 +18,41 @@ class ParkingSpotController extends Controller
         return new ParkingSpotResource($parkingSpot);
     }
 
-    public function index()
+    public function index($idParkingSettings)
     {
-        $parkingSpots = ParkingSpot::all();
+        $parkingSpots = ParkingSpot::where('id_parking_settings', $idParkingSettings)->get();
         return ParkingSpotResource::collection($parkingSpots);
     }
 
-    public function getParkingSpotsAvailables()
+    public function getParkingSpotsAvailables($idParkingSettings)
     {
-        $parkingSpots = ParkingSpot::where('status', SpotStatus::AVAILABLE)->get();
+        $parkingSpots = ParkingSpot::where('status', SpotStatus::AVAILABLE)
+            ->where('id_parking_settings', $idParkingSettings)
+            ->get();
         return ParkingSpotResource::collection($parkingSpots);
     }
 
-    public function getParkingSpotsStatus()
+    public function getParkingSpotsStatus($idParkingSettings)
     {
-        $spots = ParkingSpot::with([
-            'parkingEntries' => function ($query) {
-                $query->orderBy('entered_at', 'desc')
-                    ->limit(1);
-            }
-        ])->get();
+        $spots = ParkingSpot::where('id_parking_settings', $idParkingSettings)
+            ->with([
+                'parkingEntries' => function ($query) {
+                    $query->orderBy('entered_at', 'desc')
+                        ->limit(1);
+                }
+            ])
+            ->get();
+
         return ParkingSpotResource::collection($spots);
     }
 
-    public function getSpotsStats()
+
+    public function getSpotsStats($idParkingSettings)
     {
-        $stats = ParkingSpotStats::first();
+        $stats = ParkingSpotStats::where('id_parking_settings', $idParkingSettings)
+            ->first();
         return response()->json($stats);
     }
+
 
 }

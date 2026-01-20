@@ -29,17 +29,19 @@ class ParkingEntriesController extends Controller
 
     }
 
-    public function index($status)
+    public function index($status, $idParkingSettings)
     {
         $parkingEntries = ParkingEntry::with('client:id,name')
             ->where('status', $status)
+            ->where('id_parking_settings', $idParkingSettings)
             ->orderByDesc('entered_at')->get();
         return ParkingEntriesResource::collection($parkingEntries);
     }
 
-    public function getAllParkingEntries()
+    public function getAllParkingEntries($idParkingSettings)
     {
         $parkingEntries = ParkingEntry::with('client:id,name')
+            ->where('id_parking_settings', $idParkingSettings)
             ->orderByDesc('entered_at')->get();
         return ParkingEntriesResource::collection($parkingEntries);
     }

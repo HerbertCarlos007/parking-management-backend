@@ -33,6 +33,7 @@ class StoreUpdateParkingEntriesRequest extends FormRequest
             'price' => 'nullable|numeric|min:0',
             'status' => 'string',
             'created_by' => 'nullable|integer',
+            'id_parking_settings' => ['required', 'integer']
         ];
     }
 }

@@ -41,9 +41,9 @@ class UserController extends Controller
         ]);
     }
 
-    public function index()
+    public function index($idParkingSettings)
     {
-        $users = User::all();
+        $users = User::where('id_parking_settings', $idParkingSettings)->get();
         return UserResource::collection($users);
     }
 

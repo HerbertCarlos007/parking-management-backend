@@ -19,6 +19,7 @@ class ParkingSpotResource extends JsonResource
             'id' => $this->id,
             'code' => $this->code,
             'status' => $this->status,
+            'id_parking_settings' => $this->id_parking_settings,
             'entry' => $this->when(
                 $this->status === SpotStatus::OCCUPIED,
                 new ParkingEntriesResource($this->parkingEntries->first())
