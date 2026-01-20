@@ -11,6 +11,7 @@ class ParkingSpot extends Model
     protected $fillable = [
         'code',
         'status',
+        'id_parking_settings',
     ];
 
     protected $casts = [

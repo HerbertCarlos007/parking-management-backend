@@ -21,10 +21,10 @@ class ParkingEntriesController extends Controller
 
         $validated['entered_at'] = now();
         $validated['status'] = EntryStatus::OPEN->value;
-        $validated['created_by'] = 3;
+        $validated['created_by'] = auth()->id();
+        $validated['id_parking_settings'] = auth()->user()->id_parking_settings;
         $parkingEntry = ParkingEntry::create($validated);
         ParkingSpot::where('id', $spotId)->update(['status' => SpotStatus::OCCUPIED->value]);
-
         return new ParkingEntriesResource($parkingEntry);
 
     }

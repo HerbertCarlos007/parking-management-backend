@@ -14,6 +14,7 @@ class ParkingSpotController extends Controller
     {
         $validated = $request->validated();
         $validated['status'] = SpotStatus::AVAILABLE;
+        $validated['id_parking_settings'] = auth()->user()->id_parking_settings;
         $parkingSpot = ParkingSpot::create($validated);
         return new ParkingSpotResource($parkingSpot);
     }

@@ -22,7 +22,8 @@ class ParkingEntry extends Model
         'status',
         'created_by',
         'duration',
-        'is_paid'
+        'is_paid',
+        'id_parking_settings'
     ];
 
     protected $casts = [

@@ -26,7 +26,6 @@ class StoreUpdateParkingSpotRequest extends FormRequest
         return [
             'code' => 'string|required',
             'status' => ['sometimes', Rule::in(array_column(SpotStatus::cases(), 'value'))],
-            'id_parking_settings' => ['required', 'integer']
         ];
     }
 }

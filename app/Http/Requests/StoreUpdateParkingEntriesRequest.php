@@ -19,6 +19,8 @@ class StoreUpdateParkingEntriesRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+
+
     public function rules(): array
     {
         return [
@@ -32,8 +34,7 @@ class StoreUpdateParkingEntriesRequest extends FormRequest
             'left_at' => 'nullable|date_format:Y-m-d H:i:s|after:entered_at',
             'price' => 'nullable|numeric|min:0',
             'status' => 'string',
-            'created_by' => 'nullable|integer',
-            'id_parking_settings' => ['required', 'integer']
+            'created_by' => 'nullable|integer'
         ];
     }
 }
