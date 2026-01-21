@@ -16,9 +16,9 @@ class ClientController extends Controller
         return new ClientResource($client);
     }
 
-    public function index($idParkingSettings)
+    public function index($idCompany)
     {
-        $clients = Client::where('id_parking_settings', $idParkingSettings)->get();
+        $clients = Client::where('id_company', $idCompany)->get();
         return ClientResource::collection($clients);
     }
 }

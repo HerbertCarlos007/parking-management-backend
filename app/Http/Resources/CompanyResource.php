@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ParkingSettingsResource extends JsonResource
+class CompanyResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -27,6 +27,7 @@ class ParkingSettingsResource extends JsonResource
             'hourly_rate' => $this->hourly_rate,
             'half_hour_rate' => $this->half_hour_rate,
             'daily_rate' => $this->daily_rate,
+            'document_number' => $this->document_number,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

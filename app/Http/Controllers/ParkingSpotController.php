@@ -14,28 +14,28 @@ class ParkingSpotController extends Controller
     {
         $validated = $request->validated();
         $validated['status'] = SpotStatus::AVAILABLE;
-        $validated['id_parking_settings'] = auth()->user()->id_parking_settings;
+        $validated['id_company'] = auth()->user()->id_company;
         $parkingSpot = ParkingSpot::create($validated);
         return new ParkingSpotResource($parkingSpot);
     }
 
-    public function index($idParkingSettings)
+    public function index($idCompany)
     {
-        $parkingSpots = ParkingSpot::where('id_parking_settings', $idParkingSettings)->get();
+        $parkingSpots = ParkingSpot::where('id_company', $idCompany)->get();
         return ParkingSpotResource::collection($parkingSpots);
     }
 
-    public function getParkingSpotsAvailables($idParkingSettings)
+    public function getParkingSpotsAvailables($idCompany)
     {
         $parkingSpots = ParkingSpot::where('status', SpotStatus::AVAILABLE)
-            ->where('id_parking_settings', $idParkingSettings)
+            ->where('id_company', $idCompany)
             ->get();
         return ParkingSpotResource::collection($parkingSpots);
     }
 
-    public function getParkingSpotsStatus($idParkingSettings)
+    public function getParkingSpotsStatus($idCompany)
     {
-        $spots = ParkingSpot::where('id_parking_settings', $idParkingSettings)
+        $spots = ParkingSpot::where('id_company', $idCompany)
             ->with([
                 'parkingEntries' => function ($query) {
                     $query->orderBy('entered_at', 'desc')
@@ -48,9 +48,9 @@ class ParkingSpotController extends Controller
     }
 
 
-    public function getSpotsStats($idParkingSettings)
+    public function getSpotsStats($idCompany)
     {
-        $stats = ParkingSpotStats::where('id_parking_settings', $idParkingSettings)
+        $stats = ParkingSpotStats::where('id_company', $idCompany)
             ->first();
         return response()->json($stats);
     }

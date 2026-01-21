@@ -23,7 +23,7 @@ class ParkingEntry extends Model
         'created_by',
         'duration',
         'is_paid',
-        'id_parking_settings'
+        'id_company'
     ];
 
     protected $casts = [
@@ -42,5 +42,10 @@ class ParkingEntry extends Model
     public function parkingSpot(): BelongsTo
     {
         return $this->belongsTo(ParkingSpot::class, 'spot_id', 'id');
+    }
+
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
     }
 }

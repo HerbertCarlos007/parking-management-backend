@@ -22,26 +22,26 @@ class ParkingEntriesController extends Controller
         $validated['entered_at'] = now();
         $validated['status'] = EntryStatus::OPEN->value;
         $validated['created_by'] = auth()->id();
-        $validated['id_parking_settings'] = auth()->user()->id_parking_settings;
+        $validated['id_company'] = auth()->user()->id_company;
         $parkingEntry = ParkingEntry::create($validated);
         ParkingSpot::where('id', $spotId)->update(['status' => SpotStatus::OCCUPIED->value]);
         return new ParkingEntriesResource($parkingEntry);
 
     }
 
-    public function index($status, $idParkingSettings)
+    public function index($status, $idCompany)
     {
         $parkingEntries = ParkingEntry::with('client:id,name')
             ->where('status', $status)
-            ->where('id_parking_settings', $idParkingSettings)
+            ->where('id_company', $idCompany)
             ->orderByDesc('entered_at')->get();
         return ParkingEntriesResource::collection($parkingEntries);
     }
 
-    public function getAllParkingEntries($idParkingSettings)
+    public function getAllParkingEntries($idCompany)
     {
         $parkingEntries = ParkingEntry::with('client:id,name')
-            ->where('id_parking_settings', $idParkingSettings)
+            ->where('id_company', $idCompany)
             ->orderByDesc('entered_at')->get();
         return ParkingEntriesResource::collection($parkingEntries);
     }

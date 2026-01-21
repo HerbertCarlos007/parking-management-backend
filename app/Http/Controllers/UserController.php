@@ -41,9 +41,9 @@ class UserController extends Controller
         ]);
     }
 
-    public function index($idParkingSettings)
+    public function index($idCompany)
     {
-        $users = User::where('id_parking_settings', $idParkingSettings)->get();
+        $users = User::where('id_company', $idCompany)->get();
         return UserResource::collection($users);
     }
 

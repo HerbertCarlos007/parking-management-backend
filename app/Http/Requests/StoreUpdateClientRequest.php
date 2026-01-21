@@ -23,8 +23,7 @@ class StoreUpdateClientRequest extends FormRequest
     {
         return [
             'name' => 'string|required',
-            'phone' => 'string|required',
-             'id_parking_settings' => ['required', 'integer']
+            'phone' => 'string|required'
         ];
     }
 }
