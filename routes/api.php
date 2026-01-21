@@ -36,7 +36,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('/parking-entries', [ParkingEntriesController::class, 'store']);
     Route::get('/parking-entries/{status}/{idCompany}', [ParkingEntriesController::class, 'index']);
     Route::get('all-parking_entries/{idCompany}', [ParkingEntriesController::class, 'getAllParkingEntries']);
-    Route::put('/parking-entries/{idCompany}', [ParkingEntriesController::class, 'update']);
+    Route::put('/parking-entries/{parkingEntry}', [ParkingEntriesController::class, 'update']);
 });
 
 
