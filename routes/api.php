@@ -13,7 +13,7 @@ Route::post('/login', [UserController::class, 'login']);
 Route::get('/users/{idParkingSettings}', [UserController::class, 'index']);
 
 Route::post('parking-settings', [ParkingSettingController::class, 'store']);
-Route::get('parking-settings', [ParkingSettingController::class, 'index']);
+Route::get('parking-settings/{idParkingSettings}', [ParkingSettingController::class, 'index']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();

@@ -17,9 +17,9 @@ class ParkingSettingController extends Controller
         return new ParkingSettingsResource($parkingSetting);
     }
 
-    public function index()
+    public function index($idParkingSettings)
     {
-        $parkingSettings = ParkingSetting::all();
+        $parkingSettings = ParkingSetting::where('id', $idParkingSettings)->get();
         return ParkingSettingsResource::collection($parkingSettings);
     }
 }
