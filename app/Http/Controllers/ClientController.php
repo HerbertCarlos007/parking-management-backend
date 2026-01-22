@@ -12,6 +12,7 @@ class ClientController extends Controller
     public function store(StoreUpdateClientRequest $request)
     {
         $validated = $request->validated();
+        $validated['id_company'] = auth()->user()->id_company;
         $client = Client::create($validated);
         return new ClientResource($client);
     }

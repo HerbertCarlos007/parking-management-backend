@@ -11,6 +11,12 @@ class Client extends Model
     protected $fillable = [
         'name',
         'phone',
+        'email',
+        'document_number',
+        'plate',
+        'car_brand',
+        'color',
+        'id_company'
     ];
 
     public function parkingEntries(): HasMany
