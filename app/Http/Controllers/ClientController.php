@@ -22,4 +22,13 @@ class ClientController extends Controller
         $clients = Client::where('id_company', $idCompany)->get();
         return ClientResource::collection($clients);
     }
+
+    public function update(Client $client, StoreUpdateClientRequest $request)
+    {
+        $validated = $request->validated();
+        $client->update($validated);
+        return new ClientResource($validated);
+    }
+
+
 }
