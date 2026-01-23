@@ -30,5 +30,9 @@ class ClientController extends Controller
         return new ClientResource($validated);
     }
 
-
+    public function destroy(Client $client)
+    {
+        $client->delete();
+        return response()->json(null, 204);
+    }
 }
