@@ -27,7 +27,7 @@ class ClientController extends Controller
     {
         $validated = $request->validated();
         $client->update($validated);
-        return new ClientResource($validated);
+        return new ClientResource($client);
     }
 
     public function destroy(Client $client)
