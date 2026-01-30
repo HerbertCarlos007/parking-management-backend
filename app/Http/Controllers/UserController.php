@@ -49,6 +49,8 @@ class UserController extends Controller
 
     public function update(User $user, StoreUpdateUserRequest $request)
     {
+        $this->authorize('update', $user);
+
         $validated = $request->validated();
         $user->update($validated);
         return new UserResource($user);
@@ -56,6 +58,8 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        $this->authorize('destroy', $user);
+
         $user->delete();
         return response()->json(null, 204);
     }

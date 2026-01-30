@@ -21,4 +21,5 @@ class CompanyController extends Controller
         $companies = Company::where('id', $idCompany)->get();
         return CompanyResource::collection($companies);
     }
+
 }
