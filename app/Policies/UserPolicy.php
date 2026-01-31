@@ -8,7 +8,7 @@ use Illuminate\Auth\Access\Response;
 
 class UserPolicy
 {
-    public function viewCompanyUsers(User $authUser, int $companyId): bool
+    public function viewAny(User $authUser, int $companyId): bool
     {
         return $authUser->id_company === $companyId;
     }
