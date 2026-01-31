@@ -22,4 +22,21 @@ class CompanyController extends Controller
         return CompanyResource::collection($companies);
     }
 
+    public function update(StoreUpdateCompanyRequest $request, Company $company)
+    {
+        $this->authorize('update', $company);
+
+        $validated = $request->validated();
+        $company->update($validated);
+        return new CompanyResource($company);
+    }
+
+    public function destroy(Company $company)
+    {
+        $this->authorize('destroy', $company);
+
+        $company->delete();
+        return response()->json(null, 204);
+    }
+
 }
