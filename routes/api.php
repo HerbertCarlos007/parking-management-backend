@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/users', [UserController::class, 'store']);
 Route::post('/login', [UserController::class, 'login']);
-Route::get('/users/{idParkingSettings}', [UserController::class, 'index']);
 
 Route::post('/company', [CompanyController::class, 'store']);
 Route::get('/company/{idCompany}', [CompanyController::class, 'index']);
@@ -23,6 +22,7 @@ Route::get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function(){
     Route::put('/users/{user}', [UserController::class, 'update']);
     Route::delete('/users/{user}', [UserController::class, 'destroy']);
+    Route::get('/users/{idCompany}', [UserController::class, 'index']);
 
     Route::post('/clients', [ClientController::class, 'store']);
     Route::get('/clients/{idCompany}', [ClientController::class, 'index']);

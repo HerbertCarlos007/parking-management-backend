@@ -43,6 +43,8 @@ class UserController extends Controller
 
     public function index($idCompany)
     {
+        $this->authorize('viewCompanyUsers', [User::class, $idCompany]);
+
         $users = User::where('id_company', $idCompany)->get();
         return UserResource::collection($users);
     }
