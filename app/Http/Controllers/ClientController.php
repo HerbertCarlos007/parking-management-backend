@@ -19,6 +19,8 @@ class ClientController extends Controller
 
     public function index($idCompany)
     {
+        $this->authorize('viewAny', [Client::class, $idCompany]);
+
         $clients = Client::where('id_company', $idCompany)->get();
         return ClientResource::collection($clients);
     }

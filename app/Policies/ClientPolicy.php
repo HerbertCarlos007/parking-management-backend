@@ -9,6 +9,13 @@ use Illuminate\Auth\Access\Response;
 
 class ClientPolicy
 {
+
+    public function viewAny(User $user, int $idCompany)
+    {
+
+        return $user->id_company === $idCompany;
+    }
+
     public function update(User $user, Client $client)
     {
         return $user->id === $client->id
