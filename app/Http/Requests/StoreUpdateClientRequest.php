@@ -24,11 +24,11 @@ class StoreUpdateClientRequest extends FormRequest
         return [
             'name' => 'string|required',
             'phone' => 'string|required',
-            'email' => 'string',
-            'document_number' => 'string|required',
-            'plate' => 'string|required',
-            'car_brand' => 'string|required',
-            'color' => 'string',
+            'email' => 'string|sometimes',
+            'document_number' => 'string|sometimes',
+            'plate' => 'string|sometimes',
+            'car_brand' => 'string|sometimes',
+            'color' => 'string|sometimes',
         ];
     }
 }

@@ -25,6 +25,8 @@ class ClientController extends Controller
 
     public function update(Client $client, StoreUpdateClientRequest $request)
     {
+        $this->authorize('update', $client);
+
         $validated = $request->validated();
         $client->update($validated);
         return new ClientResource($client);
@@ -32,6 +34,8 @@ class ClientController extends Controller
 
     public function destroy(Client $client)
     {
+        $this->authorize('delete', $client);
+
         $client->delete();
         return response()->json(null, 204);
     }
