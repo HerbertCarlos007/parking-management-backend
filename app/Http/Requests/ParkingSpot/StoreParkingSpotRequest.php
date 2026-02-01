@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\ParkingSpot;
 
 use App\Enums\SpotStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreUpdateParkingSpotRequest extends FormRequest
+class StoreParkingSpotRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

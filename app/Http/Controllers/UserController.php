@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\Role;
-use App\Http\Requests\StoreLoginRequest;
-use App\Http\Requests\StoreUpdateUserRequest;
+use App\Http\Requests\Auth\StoreLoginRequest;
+use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function store(StoreUpdateUserRequest $request)
+    public function store(StoreUserRequest $request)
     {
         $validated = $request->validated();
         $user = User::create($validated);
@@ -49,7 +49,7 @@ class UserController extends Controller
         return UserResource::collection($users);
     }
 
-    public function update(User $user, StoreUpdateUserRequest $request)
+    public function update(User $user, UpdateUserRequest $request)
     {
         $this->authorize('update', $user);
 

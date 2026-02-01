@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Enums\SpotStatus;
-use App\Http\Requests\StoreUpdateParkingSpotRequest;
+use App\Http\Requests\ParkingSpot\StoreParkingSpotRequest;
 use App\Http\Resources\ParkingSpotResource;
 use App\Models\ParkingSpot;
 use App\Models\ParkingSpotStats;
 
 class ParkingSpotController extends Controller
 {
-    public function store(StoreUpdateParkingSpotRequest $request)
+    public function store(StoreParkingSpotRequest $request)
     {
         $validated = $request->validated();
         $validated['status'] = SpotStatus::AVAILABLE;

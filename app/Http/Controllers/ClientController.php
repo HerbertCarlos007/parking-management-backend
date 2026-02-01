@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUpdateClientRequest;
+use App\Http\Requests\Client\StoreClientRequest;
+use App\Http\Requests\Client\UpdateClientRequest;
 use App\Http\Resources\ClientResource;
 use App\Models\Client;
-use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    public function store(StoreUpdateClientRequest $request)
+    public function store(StoreClientRequest $request)
     {
         $validated = $request->validated();
         $validated['id_company'] = auth()->user()->id_company;
@@ -25,7 +25,7 @@ class ClientController extends Controller
         return ClientResource::collection($clients);
     }
 
-    public function update(Client $client, StoreUpdateClientRequest $request)
+    public function update(Client $client, UpdateClientRequest $request)
     {
         $this->authorize('update', $client);
 

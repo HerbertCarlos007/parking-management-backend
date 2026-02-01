@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 
-use App\Http\Requests\StoreUpdateCompanyRequest;
+use App\Http\Requests\Company\StoreCompanyRequest;
+use App\Http\Requests\Company\UpdateCompanyRequest;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
 
 class CompanyController extends Controller
 {
-    public function store(StoreUpdateCompanyRequest $request)
+    public function store(StoreCompanyRequest $request)
     {
         $validated = $request->validated();
         $company = Company::create($validated);
@@ -22,7 +23,7 @@ class CompanyController extends Controller
         return CompanyResource::collection($companies);
     }
 
-    public function update(StoreUpdateCompanyRequest $request, Company $company)
+    public function update(UpdateCompanyRequest $request, Company $company)
     {
         $this->authorize('update', $company);
 

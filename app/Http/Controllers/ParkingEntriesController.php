@@ -4,16 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Enums\EntryStatus;
 use App\Enums\SpotStatus;
-use App\Http\Requests\StoreUpdateParkingEntriesRequest;
+use App\Http\Requests\ParkingEntry\StoreParkingEntriesRequest;
 use App\Http\Resources\ParkingEntriesResource;
 use App\Models\ParkingEntry;
 use App\Models\ParkingSpot;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class ParkingEntriesController extends Controller
 {
-    public function store(StoreUpdateParkingEntriesRequest $request)
+    public function store(StoreParkingEntriesRequest $request)
     {
         $validated = $request->validated();
 
