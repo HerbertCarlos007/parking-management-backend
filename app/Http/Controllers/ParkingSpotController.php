@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\SpotStatus;
 use App\Http\Requests\ParkingSpot\StoreParkingSpotRequest;
+use App\Http\Requests\ParkingSpot\UpdateParkingSpotRequest;
 use App\Http\Resources\ParkingSpotResource;
 use App\Models\ParkingSpot;
 use App\Models\ParkingSpotStats;
@@ -55,5 +56,16 @@ class ParkingSpotController extends Controller
         return response()->json($stats);
     }
 
+    public function update(UpdateParkingSpotRequest $request, ParkingSpot $parkingSpot)
+    {
+        $validated = $request->validated();
+        $parkingSpot->update($validated);
+        return new ParkingSpotResource($parkingSpot);
+    }
 
+    public function destroy(ParkingSpot $parkingSpot)
+    {
+        $parkingSpot->delete();
+        return response()->json(null, 204);
+    }
 }

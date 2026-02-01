@@ -34,6 +34,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/parking-spots-available/{idCompany}', [ParkingSpotController::class, 'getParkingSpotsAvailables']);
     Route::get('/parking-spots-status/{idCompany}', [ParkingSpotController::class, 'getParkingSpotsStatus']);
     Route::get('/spots-stats/{idCompany}', [ParkingSpotController::class, 'getSpotsStats']);
+    Route::put('/parking-spots/{parkingSpot}', [ParkingSpotController::class, 'update']);
+    Route::delete('/parking-spots/{parkingSpot}', [ParkingSpotController::class, 'destroy']);
 
     Route::post('/parking-entries', [ParkingEntriesController::class, 'store']);
     Route::get('/parking-entries/{status}/{idCompany}', [ParkingEntriesController::class, 'index']);
