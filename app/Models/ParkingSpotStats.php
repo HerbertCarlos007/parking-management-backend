@@ -12,5 +12,7 @@ class ParkingSpotStats extends Model
         'available',
         'occupied',
         'total',
+        'available_percent',
+        'occupied_percent'
     ];
 }

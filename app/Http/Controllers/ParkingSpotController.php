@@ -6,6 +6,7 @@ use App\Enums\SpotStatus;
 use App\Http\Requests\ParkingSpot\StoreParkingSpotRequest;
 use App\Http\Requests\ParkingSpot\UpdateParkingSpotRequest;
 use App\Http\Resources\ParkingSpotResource;
+use App\Models\OccupancyByHour;
 use App\Models\ParkingSpot;
 use App\Models\ParkingSpotStats;
 
@@ -53,6 +54,13 @@ class ParkingSpotController extends Controller
         $stats = ParkingSpotStats::where('id_company', $idCompany)
             ->first();
         return response()->json($stats);
+    }
+
+    public function getOccupancyByHour($idCompany)
+    {
+        $occupancy = OccupancyByHour::where('id_company', $idCompany)
+            ->get();
+        return response()->json($occupancy);
     }
 
     public function update(UpdateParkingSpotRequest $request, ParkingSpot $parkingSpot)
