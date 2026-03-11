@@ -1,27 +1,40 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Modules\User\UseCases\CreateUser;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\StoreLoginRequest;
-use App\Http\Requests\User\StoreUserRequest;
-use App\Http\Requests\User\UpdateUserRequest;
-use App\Http\Resources\UserResource;
-use App\Models\User;
+use App\Modules\User\Models\User;
+use App\Modules\User\Requests\StoreUserRequest;
+use App\Modules\User\Requests\UpdateUserRequest;
+use App\Modules\User\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    private CreateUser $createUser;
+    public function __construct(CreateUser $createUser)
+    {
+        $this->createUser = $createUser;
+    }
+
     public function store(StoreUserRequest $request)
     {
-        $validated = $request->validated();
-        $user = User::create($validated);
-        $token = $user->createToken('api_token')->plainTextToken;
-
+//        $validated = $request->validated();
+//        $user = User::create($validated);
+//        $token = $user->createToken('api_token')->plainTextToken;
+//
+//        return response()->json([
+//            'user' => new UserResource($user),
+//            'access_token' => $token,
+//            'token_type' => 'Bearer',
+//        ]);
+        $user = $this->createUser->execute($request->toDTO());
         return response()->json([
             'user' => new UserResource($user),
-            'access_token' => $token,
+            'access_token' => $user->token,
             'token_type' => 'Bearer',
-        ]);
+        ], 201);
     }
 
     public function login(StoreLoginRequest $request)

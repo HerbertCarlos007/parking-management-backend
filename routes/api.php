@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\ClientController;
-use App\Http\Controllers\ParkingEntriesController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ParkingEntriesController;
 use App\Http\Controllers\ParkingSpotController;
-use App\Http\Controllers\UserController;
+use App\Modules\User\UseCases\CreateUser\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
