@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Modules\User\Requests;
 
+use App\Enums\Role;
+use App\Modules\User\DTOs\LoginDTO;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreLoginRequest extends FormRequest
@@ -25,5 +27,13 @@ class StoreLoginRequest extends FormRequest
             'email' => 'required|email',
             'password' => 'required'
         ];
+    }
+
+    public function toDTO(): LoginDTO
+    {
+        return new LoginDTO(
+            email: $this->validated('email'),
+            password: $this->validated('password')
+        );
     }
 }

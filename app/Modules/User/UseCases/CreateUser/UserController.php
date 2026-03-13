@@ -3,19 +3,21 @@
 namespace App\Modules\User\UseCases\CreateUser;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\StoreLoginRequest;
 use App\Modules\User\Models\User;
+use App\Modules\User\Requests\StoreLoginRequest;
 use App\Modules\User\Requests\StoreUserRequest;
 use App\Modules\User\Requests\UpdateUserRequest;
 use App\Modules\User\Resources\UserResource;
-use Illuminate\Support\Facades\Auth;
+use App\Modules\User\UseCases\LoginUser\LoginUserUseCase;
 
 class UserController extends Controller
 {
-    private CreateUser $createUser;
-    public function __construct(CreateUser $createUser)
+    private CreateUserUseCase $createUser;
+    private LoginUserUseCase $loginUser;
+    public function __construct(CreateUserUseCase $createUser, LoginUserUseCase $loginUser)
     {
         $this->createUser = $createUser;
+        $this->loginUser = $loginUser;
     }
 
     public function store(StoreUserRequest $request)
@@ -30,14 +32,9 @@ class UserController extends Controller
 
     public function login(StoreLoginRequest $request)
     {
+        $dto = $request->toDTO();
+        $user = $this->loginUser->execute($dto);
 
-        $data = $request->validated();
-
-        if (!Auth::attempt($data)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-
-        $user = User::where('email', $data['email'])->firstOrFail();
         return response()->json([
             'access_token' => $user->createToken('api_token')->plainTextToken,
             'token_type' => 'Bearer',
