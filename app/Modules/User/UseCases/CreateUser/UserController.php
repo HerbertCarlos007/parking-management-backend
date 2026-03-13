@@ -20,15 +20,6 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-//        $validated = $request->validated();
-//        $user = User::create($validated);
-//        $token = $user->createToken('api_token')->plainTextToken;
-//
-//        return response()->json([
-//            'user' => new UserResource($user),
-//            'access_token' => $token,
-//            'token_type' => 'Bearer',
-//        ]);
         $user = $this->createUser->execute($request->toDTO());
         return response()->json([
             'user' => new UserResource($user),
