@@ -8,16 +8,19 @@ use App\Modules\User\Requests\StoreLoginRequest;
 use App\Modules\User\Requests\StoreUserRequest;
 use App\Modules\User\Requests\UpdateUserRequest;
 use App\Modules\User\Resources\UserResource;
+use App\Modules\User\UseCases\ListUsers\ListUsersUseCase;
 use App\Modules\User\UseCases\LoginUser\LoginUserUseCase;
 
 class UserController extends Controller
 {
     private CreateUserUseCase $createUser;
     private LoginUserUseCase $loginUser;
-    public function __construct(CreateUserUseCase $createUser, LoginUserUseCase $loginUser)
+    private ListUsersUseCase $listUsers;
+    public function __construct(CreateUserUseCase $createUser, LoginUserUseCase $loginUser, ListUsersUseCase $listUsers)
     {
         $this->createUser = $createUser;
         $this->loginUser = $loginUser;
+        $this->listUsers = $listUsers;
     }
 
     public function store(StoreUserRequest $request)
@@ -46,7 +49,7 @@ class UserController extends Controller
     {
         $this->authorize('viewAny', [User::class, $idCompany]);
 
-        $users = User::where('id_company', $idCompany)->get();
+        $users = $this->listUsers->execute($idCompany);
         return UserResource::collection($users);
     }
 
