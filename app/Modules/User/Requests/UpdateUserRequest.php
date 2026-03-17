@@ -2,6 +2,8 @@
 
 namespace App\Modules\User\Requests;
 
+use App\Enums\Role;
+use App\Modules\User\DTOs\UpdateUserDTO;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateUserRequest extends FormRequest
@@ -22,7 +24,22 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['sometimes', 'string', 'max:255'],
+            'email' => ['sometimes', 'email', 'max:255'],
+            'phone_number' => ['sometimes', 'nullable', 'string'],
+            'password' => ['sometimes', 'min:6', 'max:100'],
+            'role' => ['sometimes', 'string'],
         ];
+    }
+
+    public function toDTO(): UpdateUserDTO
+    {
+        return new UpdateUserDTO(
+            name: $this->validated('name'),
+            email: $this->validated('email'),
+            password: $this->validated('password'),
+            phone_number: $this->validated('phone_number'),
+            role: Role::from($this->validated('role')),
+        );
     }
 }

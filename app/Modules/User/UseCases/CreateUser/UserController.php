@@ -8,19 +8,29 @@ use App\Modules\User\Requests\StoreLoginRequest;
 use App\Modules\User\Requests\StoreUserRequest;
 use App\Modules\User\Requests\UpdateUserRequest;
 use App\Modules\User\Resources\UserResource;
+use App\Modules\User\UseCases\DeleteUser\DeleteUserUseCase;
 use App\Modules\User\UseCases\ListUsers\ListUsersUseCase;
 use App\Modules\User\UseCases\LoginUser\LoginUserUseCase;
+use App\Modules\User\UseCases\UpdateUser\UpdateUserUseCase;
 
 class UserController extends Controller
 {
     private CreateUserUseCase $createUser;
     private LoginUserUseCase $loginUser;
     private ListUsersUseCase $listUsers;
-    public function __construct(CreateUserUseCase $createUser, LoginUserUseCase $loginUser, ListUsersUseCase $listUsers)
+    private UpdateUserUseCase $updateUser;
+    private DeleteUserUseCase $deleteUser;
+    public function __construct(CreateUserUseCase $createUser,
+                                LoginUserUseCase $loginUser,
+                                ListUsersUseCase $listUsers,
+                                UpdateUserUseCase $updateUser,
+                                DeleteUserUseCase $deleteUser)
     {
         $this->createUser = $createUser;
         $this->loginUser = $loginUser;
         $this->listUsers = $listUsers;
+        $this->updateUser = $updateUser;
+        $this->deleteUser = $deleteUser;
     }
 
     public function store(StoreUserRequest $request)
@@ -57,8 +67,7 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
 
-        $validated = $request->validated();
-        $user->update($validated);
+        $user = $this->updateUser->execute($user, $request->toDTO());
         return new UserResource($user);
     }
 
@@ -66,7 +75,7 @@ class UserController extends Controller
     {
         $this->authorize('destroy', $user);
 
-        $user->delete();
-        return response()->json(null, 204);
+        $this->deleteUser->execute($user);
+        return response()->noContent();
     }
 }
