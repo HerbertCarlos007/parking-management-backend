@@ -8,23 +8,21 @@ use App\Modules\Client\Requests\StoreClientRequest;
 use App\Modules\Client\Requests\UpdateClientRequest;
 use App\Modules\Client\Resources\ClientResource;
 use App\Modules\Client\UseCases\CreateClient\CreateClientUseCase;
+use App\Modules\Client\UseCases\ListClients\ListClientsUseCase;
 
 class ClientController extends Controller
 {
     private CreateClientUseCase $createClient;
+    private ListClientsUseCase $listClient;
 
-    public function __construct(CreateClientUseCase $createClient)
+    public function __construct(CreateClientUseCase $createClient, ListClientsUseCase $listClient)
     {
         $this->createClient = $createClient;
+        $this->listClient = $listClient;
     }
 
     public function store(StoreClientRequest $request)
     {
-//        $validated = $request->validated();
-//        $validated['id_company'] = auth()->user()->id_company;
-//        $client = Client::create($validated);
-
-
         $client = $this->createClient->execute($request->toDTO());
         return new ClientResource($client);
     }
@@ -33,7 +31,7 @@ class ClientController extends Controller
     {
         $this->authorize('viewAny', [Client::class, $idCompany]);
 
-        $clients = Client::where('id_company', $idCompany)->get();
+        $clients = $this->listClient->execute($idCompany);
         return ClientResource::collection($clients);
     }
 
