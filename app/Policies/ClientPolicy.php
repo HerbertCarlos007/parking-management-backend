@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Enums\Role;
-use App\Models\Client;
+use App\Modules\Client\Models\Client;
 use App\Modules\User\Models\User;
 
 class ClientPolicy

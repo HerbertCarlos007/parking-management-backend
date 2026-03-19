@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Client;
+namespace App\Modules\Client\Requests;
 
+use App\Modules\Client\DTOs\CreateClientDTO;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreClientRequest extends FormRequest
@@ -30,5 +31,19 @@ class StoreClientRequest extends FormRequest
             'car_brand' => 'string|required',
             'color' => 'string|required',
         ];
+    }
+
+    public function toDTO(): CreateClientDTO
+    {
+        return new CreateClientDTO(
+            name: $this->validated('name'),
+            email: $this->validated('email'),
+            phone: $this->validated('phone'),
+            document_number: $this->validated('document_number'),
+            plate: $this->validated('plate'),
+            car_brand: $this->validated('car_brand'),
+            color: $this->validated('color'),
+            id_company: auth()->user()->id_company
+        );
     }
 }

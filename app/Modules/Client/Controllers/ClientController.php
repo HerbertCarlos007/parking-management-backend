@@ -1,19 +1,31 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Modules\Client\Controllers;
 
-use App\Http\Requests\Client\StoreClientRequest;
-use App\Http\Requests\Client\UpdateClientRequest;
-use App\Http\Resources\ClientResource;
-use App\Models\Client;
+use App\Http\Controllers\Controller;
+use App\Modules\Client\Models\Client;
+use App\Modules\Client\Requests\StoreClientRequest;
+use App\Modules\Client\Requests\UpdateClientRequest;
+use App\Modules\Client\Resources\ClientResource;
+use App\Modules\Client\UseCases\CreateClient\CreateClientUseCase;
 
 class ClientController extends Controller
 {
+    private CreateClientUseCase $createClient;
+
+    public function __construct(CreateClientUseCase $createClient)
+    {
+        $this->createClient = $createClient;
+    }
+
     public function store(StoreClientRequest $request)
     {
-        $validated = $request->validated();
-        $validated['id_company'] = auth()->user()->id_company;
-        $client = Client::create($validated);
+//        $validated = $request->validated();
+//        $validated['id_company'] = auth()->user()->id_company;
+//        $client = Client::create($validated);
+
+
+        $client = $this->createClient->execute($request->toDTO());
         return new ClientResource($client);
     }
 

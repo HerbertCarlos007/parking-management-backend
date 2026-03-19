@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\User\UseCases\CreateUser;
+namespace App\Modules\User\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Modules\User\Models\User;
@@ -8,6 +8,7 @@ use App\Modules\User\Requests\StoreLoginRequest;
 use App\Modules\User\Requests\StoreUserRequest;
 use App\Modules\User\Requests\UpdateUserRequest;
 use App\Modules\User\Resources\UserResource;
+use App\Modules\User\UseCases\CreateUser\CreateUserUseCase;
 use App\Modules\User\UseCases\DeleteUser\DeleteUserUseCase;
 use App\Modules\User\UseCases\ListUsers\ListUsersUseCase;
 use App\Modules\User\UseCases\LoginUser\LoginUserUseCase;

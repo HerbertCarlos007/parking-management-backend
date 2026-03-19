@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\EntryStatus;
 use App\Enums\EntryType;
+use App\Modules\Client\Models\Client;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
