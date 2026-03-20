@@ -2,6 +2,7 @@
 
 namespace App\Modules\Client\Requests;
 
+use App\Modules\Client\DTOs\UpdateClientDTO;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateClientRequest extends FormRequest
@@ -30,5 +31,18 @@ class UpdateClientRequest extends FormRequest
             'car_brand' => 'sometimes|string',
             'color' => 'sometimes|string',
         ];
+    }
+
+    public function toDTO(): UpdateClientDTO
+    {
+        return new UpdateClientDTO(
+            name: $this->validated('name'),
+            email: $this->validated('email'),
+            phone: $this->validated('phone'),
+            document_number: $this->validated('document_number'),
+            plate: $this->validated('plate'),
+            car_brand: $this->validated('car_brand'),
+            color: $this->validated('color'),
+        );
     }
 }

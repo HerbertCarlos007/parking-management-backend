@@ -17,13 +17,13 @@ class ClientPolicy
 
     public function update(User $user, Client $client)
     {
-        return $user->id === $client->id
+        return $user->id_company === $client->id_company
             && in_array($user->role, [Role::ADMIN, Role::MANAGER]);
     }
 
     public function delete(User $user, Client $client)
     {
-        return $user->id === $client->id
+        return $user->id_company === $client->id_company
             && in_array($user->role, [Role::ADMIN, Role::MANAGER]);
     }
 
