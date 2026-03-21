@@ -27,4 +27,9 @@ class ClientRepository implements ClientRepositoryInterface
         $client->update($data);
         return $client;
     }
+
+    public function delete(Client $client): void
+    {
+        $client->delete();
+    }
 }

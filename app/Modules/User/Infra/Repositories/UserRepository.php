@@ -39,7 +39,6 @@ class UserRepository implements UserRepositoryInterface
     public function delete(User $user): void
     {
         $user->delete();
-
     }
 
 
