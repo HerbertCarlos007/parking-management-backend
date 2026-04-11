@@ -17,12 +17,14 @@ class ParkingSpotController extends Controller
         $validated = $request->validated();
         $validated['id_company'] = auth()->user()->id_company;
         $parkingSpot = ParkingSpot::create($validated);
+
         return new ParkingSpotResource($parkingSpot);
     }
 
     public function index($idCompany)
     {
         $parkingSpots = ParkingSpot::where('id_company', $idCompany)->get();
+
         return ParkingSpotResource::collection($parkingSpots);
     }
 
@@ -31,6 +33,7 @@ class ParkingSpotController extends Controller
         $parkingSpots = ParkingSpot::where('status', SpotStatus::AVAILABLE)
             ->where('id_company', $idCompany)
             ->get();
+
         return ParkingSpotResource::collection($parkingSpots);
     }
 
@@ -41,18 +44,18 @@ class ParkingSpotController extends Controller
                 'parkingEntries' => function ($query) {
                     $query->orderBy('entered_at', 'desc')
                         ->limit(1);
-                }
+                },
             ])
             ->get();
 
         return ParkingSpotResource::collection($spots);
     }
 
-
     public function getSpotsStats($idCompany)
     {
         $stats = ParkingSpotStats::where('id_company', $idCompany)
             ->first();
+
         return response()->json($stats);
     }
 
@@ -60,6 +63,7 @@ class ParkingSpotController extends Controller
     {
         $occupancy = OccupancyByHour::where('id_company', $idCompany)
             ->get();
+
         return response()->json($occupancy);
     }
 
@@ -67,12 +71,14 @@ class ParkingSpotController extends Controller
     {
         $validated = $request->validated();
         $parkingSpot->update($validated);
+
         return new ParkingSpotResource($parkingSpot);
     }
 
     public function destroy(ParkingSpot $parkingSpot)
     {
         $parkingSpot->delete();
+
         return response()->json(null, 204);
     }
 }

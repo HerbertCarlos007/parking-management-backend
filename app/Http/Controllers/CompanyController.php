@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Http\Requests\Company\StoreCompanyRequest;
 use App\Http\Requests\Company\UpdateCompanyRequest;
 use App\Http\Resources\CompanyResource;
@@ -14,12 +13,14 @@ class CompanyController extends Controller
     {
         $validated = $request->validated();
         $company = Company::create($validated);
+
         return new CompanyResource($company);
     }
 
     public function index($idCompany)
     {
         $companies = Company::where('id', $idCompany)->get();
+
         return CompanyResource::collection($companies);
     }
 
@@ -29,6 +30,7 @@ class CompanyController extends Controller
 
         $validated = $request->validated();
         $company->update($validated);
+
         return new CompanyResource($company);
     }
 
@@ -37,7 +39,7 @@ class CompanyController extends Controller
         $this->authorize('destroy', $company);
 
         $company->delete();
+
         return response()->json(null, 204);
     }
-
 }

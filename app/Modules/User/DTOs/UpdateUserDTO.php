@@ -12,9 +12,7 @@ class UpdateUserDTO
         public ?string $password,
         public ?string $phone_number,
         public ?Role $role,
-    )
-    {
-    }
+    ) {}
 
     public function toArray(): array
     {
@@ -24,6 +22,6 @@ class UpdateUserDTO
             'password' => $this->password,
             'phone_number' => $this->phone_number,
             'role' => $this->role?->value,
-        ], fn($value) => !is_null($value));
+        ], fn ($value) => ! is_null($value));
     }
 }

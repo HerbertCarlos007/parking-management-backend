@@ -12,9 +12,7 @@ class UpdateClientDTO
         public ?string $plate,
         public ?string $car_brand,
         public ?string $color,
-    )
-    {
-    }
+    ) {}
 
     public function toArray(): array
     {
@@ -29,5 +27,3 @@ class UpdateClientDTO
         ];
     }
 }
-
-

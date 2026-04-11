@@ -8,6 +8,7 @@ use App\Modules\Client\Models\Client;
 class DeleteClientUseCase
 {
     private ClientRepositoryInterface $clientRepository;
+
     public function __construct(ClientRepositoryInterface $clientRepository)
     {
         $this->clientRepository = $clientRepository;

@@ -35,13 +35,13 @@ class ParkingEntriesResource extends JsonResource
             'created_by' => $this->created_by,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'id_company' => $this->id_company
+            'id_company' => $this->id_company,
         ];
     }
 
     private function formatDuration($minutes)
     {
-        if (!$minutes) {
+        if (! $minutes) {
             return null;
         }
 
@@ -50,5 +50,4 @@ class ParkingEntriesResource extends JsonResource
 
         return sprintf('%02d:%02d', $hours, $remainingMinutes);
     }
-
 }

@@ -33,6 +33,7 @@ class UserRepository implements UserRepositoryInterface
             $data['password'] = bcrypt($data['password']);
         }
         $user->update($data);
+
         return $user;
     }
 
@@ -40,6 +41,4 @@ class UserRepository implements UserRepositoryInterface
     {
         $user->delete();
     }
-
-
 }

@@ -18,6 +18,7 @@ class UpdateClientUseCase
     public function execute(Client $client, UpdateClientDTO $dto)
     {
         $client = $this->clientRepository->update($client, $dto);
+
         return $client;
     }
 }

@@ -29,7 +29,7 @@ class CompanyResource extends JsonResource
             'daily_rate' => $this->daily_rate,
             'document_number' => $this->document_number,
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'updated_at' => $this->updated_at,
         ];
     }
 }

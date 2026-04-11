@@ -13,9 +13,7 @@ class CreateClientDTO
         public string $car_brand,
         public string $color,
         public string $id_company
-    )
-    {
-    }
+    ) {}
 
     public function toArray(): array
     {
@@ -27,9 +25,7 @@ class CreateClientDTO
             'plate' => $this->plate,
             'car_brand' => $this->car_brand,
             'color' => $this->color,
-            'id_company' => $this->id_company
+            'id_company' => $this->id_company,
         ];
     }
 }
-
-

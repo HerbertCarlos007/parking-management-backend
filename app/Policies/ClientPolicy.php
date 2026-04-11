@@ -8,7 +8,6 @@ use App\Modules\User\Models\User;
 
 class ClientPolicy
 {
-
     public function viewAny(User $user, int $idCompany)
     {
 
@@ -26,5 +25,4 @@ class ClientPolicy
         return $user->id_company === $client->id_company
             && in_array($user->role, [Role::ADMIN, Role::MANAGER]);
     }
-
 }

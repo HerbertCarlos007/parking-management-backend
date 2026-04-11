@@ -13,9 +13,7 @@ class CreateUserDTO
         public string $phone_number,
         public Role $role,
         public int $id_company
-    )
-    {
-    }
+    ) {}
 
     public function toArray(): array
     {
@@ -25,7 +23,7 @@ class CreateUserDTO
             'password' => $this->password,
             'phone_number' => $this->phone_number,
             'role' => $this->role,
-            'id_company' => $this->id_company
+            'id_company' => $this->id_company,
         ];
     }
 }

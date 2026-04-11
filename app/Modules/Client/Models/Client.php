@@ -18,7 +18,7 @@ class Client extends Model
         'plate',
         'car_brand',
         'color',
-        'id_company'
+        'id_company',
     ];
 
     public function parkingEntries(): HasMany

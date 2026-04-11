@@ -8,7 +8,6 @@ use App\Modules\Client\Infra\Contracts\ClientRepositoryInterface;
 use App\Modules\Client\Models\Client;
 use Illuminate\Database\Eloquent\Collection;
 
-
 class ClientRepository implements ClientRepositoryInterface
 {
     public function create(CreateClientDTO $createClientDTO): Client
@@ -25,6 +24,7 @@ class ClientRepository implements ClientRepositoryInterface
     {
         $data = $updateClientDTO->toArray();
         $client->update($data);
+
         return $client;
     }
 

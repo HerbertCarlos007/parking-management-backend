@@ -8,6 +8,7 @@ use App\Modules\User\Models\User;
 class DeleteUserUseCase
 {
     private UserRepositoryInterface $userRepository;
+
     public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;

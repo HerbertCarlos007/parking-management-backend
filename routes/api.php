@@ -18,8 +18,7 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-
-Route::middleware('auth:sanctum')->group(function(){
+Route::middleware('auth:sanctum')->group(function () {
     Route::put('/users/{user}', [UserController::class, 'update']);
     Route::delete('/users/{user}', [UserController::class, 'destroy']);
     Route::get('/users/{idCompany}', [UserController::class, 'index']);
@@ -46,12 +45,3 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::put('/company/{company}', [CompanyController::class, 'update']);
     Route::delete('/company/{company}', [CompanyController::class, 'destroy']);
 });
-
-
-
-
-
-
-
-
-

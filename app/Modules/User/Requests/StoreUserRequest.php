@@ -4,6 +4,7 @@ namespace App\Modules\User\Requests;
 
 use App\Enums\Role;
 use App\Modules\User\DTOs\CreateUserDTO;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreUserRequest extends FormRequest
@@ -19,7 +20,7 @@ class StoreUserRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
@@ -29,7 +30,7 @@ class StoreUserRequest extends FormRequest
             'phone_number' => ['required', 'nullable', 'string'],
             'role' => ['required', 'string'],
             'password' => ['required', 'min:6', 'max:100'],
-            'id_company' => ['required', 'integer']
+            'id_company' => ['required', 'integer'],
         ];
 
     }

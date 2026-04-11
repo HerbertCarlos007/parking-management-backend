@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Company;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCompanyRequest extends FormRequest
@@ -17,7 +18,7 @@ class StoreCompanyRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
@@ -26,7 +27,7 @@ class StoreCompanyRequest extends FormRequest
             'address' => ['sometimes', 'string', 'max:255'],
             'phone' => ['sometimes', 'string', 'max:20'],
             'email' => ['sometimes', 'required', 'email', 'max:255'],
-            'total_spots' => ['sometimes','integer', 'min:1'],
+            'total_spots' => ['sometimes', 'integer', 'min:1'],
             'grace_period_minutes' => ['sometimes', 'integer', 'min:0'],
             'opening_time' => ['sometimes'],
             'closing_time' => ['sometimes'],

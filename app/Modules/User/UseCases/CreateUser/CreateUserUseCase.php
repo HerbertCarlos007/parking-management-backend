@@ -9,6 +9,7 @@ use App\Modules\User\Models\User;
 class CreateUserUseCase
 {
     private UserRepositoryInterface $userRepository;
+
     public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
@@ -18,6 +19,7 @@ class CreateUserUseCase
     {
         $user = $this->userRepository->create($dto);
         $user->token = $user->createToken('token')->plainTextToken;
+
         return $user;
     }
 }

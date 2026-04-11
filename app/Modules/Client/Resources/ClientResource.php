@@ -23,7 +23,7 @@ class ClientResource extends JsonResource
             'plate' => $this->plate,
             'car_brand' => $this->car_brand,
             'color' => $this->color,
-            'id_company' => $this->id_company
+            'id_company' => $this->id_company,
         ];
     }
 }

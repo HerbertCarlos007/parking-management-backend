@@ -9,6 +9,7 @@ use App\Modules\User\Models\User;
 class UpdateUserUseCase
 {
     private UserRepositoryInterface $userRepository;
+
     public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
@@ -17,7 +18,7 @@ class UpdateUserUseCase
     public function execute(User $user, UpdateUserDTO $dto)
     {
         $user = $this->userRepository->update($user, $dto);
+
         return $user;
     }
-
 }

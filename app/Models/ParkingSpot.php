@@ -20,7 +20,7 @@ class ParkingSpot extends Model
     ];
 
     protected $attributes = [
-        'status' => SpotStatus::AVAILABLE
+        'status' => SpotStatus::AVAILABLE,
     ];
 
     public function parkingEntries(): HasMany

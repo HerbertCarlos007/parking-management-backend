@@ -9,6 +9,7 @@ use App\Modules\Client\Models\Client;
 class CreateClientUseCase
 {
     private ClientRepositoryInterface $clientRepository;
+
     public function __construct(ClientRepositoryInterface $clientRepository)
     {
         $this->clientRepository = $clientRepository;
@@ -17,6 +18,7 @@ class CreateClientUseCase
     public function execute(CreateClientDTO $createClientDTO): Client
     {
         $client = $this->clientRepository->create($createClientDTO);
+
         return $client;
     }
 }

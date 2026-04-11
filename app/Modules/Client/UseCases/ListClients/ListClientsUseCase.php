@@ -16,6 +16,7 @@ class ListClientsUseCase
     public function execute(int $companyId)
     {
         $clients = $this->clientRepository->findClientsByCompany($companyId);
+
         return $clients;
     }
 }

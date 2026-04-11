@@ -24,6 +24,7 @@ class ParkingEntriesController extends Controller
         $validated['id_company'] = auth()->user()->id_company;
         $parkingEntry = ParkingEntry::create($validated);
         ParkingSpot::where('id', $spotId)->update(['status' => SpotStatus::OCCUPIED->value]);
+
         return new ParkingEntriesResource($parkingEntry);
 
     }
@@ -34,6 +35,7 @@ class ParkingEntriesController extends Controller
             ->where('status', $status)
             ->where('id_company', $idCompany)
             ->orderByDesc('entered_at')->get();
+
         return ParkingEntriesResource::collection($parkingEntries);
     }
 
@@ -42,6 +44,7 @@ class ParkingEntriesController extends Controller
         $parkingEntries = ParkingEntry::with('client:id,name')
             ->where('id_company', $idCompany)
             ->orderByDesc('entered_at')->get();
+
         return ParkingEntriesResource::collection($parkingEntries);
     }
 
@@ -50,7 +53,7 @@ class ParkingEntriesController extends Controller
 
         if ($parkingEntry->status === EntryStatus::CLOSED) {
             return response()->json([
-                'message' => 'Esta entrada de estacionamento já está fechada.'
+                'message' => 'Esta entrada de estacionamento já está fechada.',
             ], 400);
         }
 
@@ -75,9 +78,9 @@ class ParkingEntriesController extends Controller
             'price' => $calculatedPrice,
             'status' => EntryStatus::CLOSED,
             'duration' => $totalMinutesParked,
-            'is_paid' => true
+            'is_paid' => true,
         ]);
+
         return new ParkingEntriesResource($parkingEntry);
     }
-
 }

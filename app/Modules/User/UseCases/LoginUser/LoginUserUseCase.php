@@ -20,13 +20,14 @@ class LoginUserUseCase
     {
         $user = $this->userRepository->findByEmail($dto->email);
 
-        if (!$user) {
+        if (! $user) {
             throw new \Exception('Credenciais inválidas');
         }
 
-        if (!Hash::check($dto->password, $user->password)) {
+        if (! Hash::check($dto->password, $user->password)) {
             throw new \Exception('Unauthorized');
         }
+
         return $user;
     }
 }

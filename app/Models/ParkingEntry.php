@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ParkingEntry extends Model
 {
-    protected $fillable =  [
+    protected $fillable = [
         'client_id',
         'plate',
         'model',
@@ -24,7 +24,7 @@ class ParkingEntry extends Model
         'created_by',
         'duration',
         'is_paid',
-        'id_company'
+        'id_company',
     ];
 
     protected $casts = [

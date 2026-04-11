@@ -17,15 +17,20 @@ use App\Modules\User\UseCases\UpdateUser\UpdateUserUseCase;
 class UserController extends Controller
 {
     private CreateUserUseCase $createUser;
+
     private LoginUserUseCase $loginUser;
+
     private ListUsersUseCase $listUsers;
+
     private UpdateUserUseCase $updateUser;
+
     private DeleteUserUseCase $deleteUser;
+
     public function __construct(CreateUserUseCase $createUser,
-                                LoginUserUseCase $loginUser,
-                                ListUsersUseCase $listUsers,
-                                UpdateUserUseCase $updateUser,
-                                DeleteUserUseCase $deleteUser)
+        LoginUserUseCase $loginUser,
+        ListUsersUseCase $listUsers,
+        UpdateUserUseCase $updateUser,
+        DeleteUserUseCase $deleteUser)
     {
         $this->createUser = $createUser;
         $this->loginUser = $loginUser;
@@ -37,6 +42,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $user = $this->createUser->execute($request->toDTO());
+
         return response()->json([
             'user' => new UserResource($user),
             'access_token' => $user->token,
@@ -61,6 +67,7 @@ class UserController extends Controller
         $this->authorize('viewAny', [User::class, $idCompany]);
 
         $users = $this->listUsers->execute($idCompany);
+
         return UserResource::collection($users);
     }
 
@@ -69,6 +76,7 @@ class UserController extends Controller
         $this->authorize('update', $user);
 
         $user = $this->updateUser->execute($user, $request->toDTO());
+
         return new UserResource($user);
     }
 
@@ -77,6 +85,7 @@ class UserController extends Controller
         $this->authorize('destroy', $user);
 
         $this->deleteUser->execute($user);
+
         return response()->noContent();
     }
 }

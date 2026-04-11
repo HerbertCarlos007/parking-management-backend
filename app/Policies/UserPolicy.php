@@ -12,7 +12,6 @@ class UserPolicy
         return $authUser->id_company === $companyId;
     }
 
-
     public function update(User $user, User $model)
     {
         return $user->id_company === $model->id_company
@@ -24,5 +23,4 @@ class UserPolicy
         return $user->id_company === $model->id_company
             && in_array($user->role, [Role::ADMIN, Role::MANAGER]);
     }
-
 }
